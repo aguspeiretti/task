@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useState } from "react";
@@ -40,6 +41,12 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       setErrors(error.response.data);
     }
+  };
+
+  const logOut = async () => {
+    Cookies.remove("token");
+    setIsAutenticated(false);
+    setUser(null);
   };
 
   useEffect(() => {
@@ -95,6 +102,7 @@ export const AuthProvider = ({ children }) => {
         errors,
         signIn,
         loading,
+        logOut,
       }}
     >
       {children}
